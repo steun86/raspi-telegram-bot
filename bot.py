@@ -2,6 +2,7 @@ import logging
 from telegram import Update
 from telegram.ext import filters, ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler
 import subprocess
+import os
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -24,7 +25,10 @@ async def magnet(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await context.bot.send_message(chat_id=update.effective_chat.id, text="Not a magnet link")
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token('6315327775:AAFO8HFxs4UIxdxW_WkLKXUcgD2l132AAcQ').build()
+    #get token from environment variables
+    token = os.environ.get('TELEGRAM_SECRET')
+
+    application = ApplicationBuilder().token(token).build()
     
     space_handler = CommandHandler('space', space)
     magnet_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), magnet)
