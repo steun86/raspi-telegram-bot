@@ -1,3 +1,4 @@
+#!/srv/raspi-telegram-bot/.venv/bin/python3
 import logging
 from telegram import Update
 from telegram.ext import filters, ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler
